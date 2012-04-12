@@ -9,6 +9,7 @@ module OAuth2::Provider::Models::AccessToken
     validate :expires_at_isnt_greater_than_authorization
 
     delegate :scope, :has_scope?, :client, :resource_owner, :to => :authorization
+
   end
 
   def initialize(attributes = {}, *args, &block)
@@ -21,8 +22,8 @@ module OAuth2::Provider::Models::AccessToken
 
   def as_json(options = {})
     {"access_token" => access_token}.tap do |result|
-      result["expires_in"] = expires_in if expires_at.present?
-      result["refresh_token"] = refresh_token if refresh_token.present?
+      result["refresh_token"] = refresh_token if refresh_token.present? && !self.expires_at.nil?
+      result["expires_in"] = expires_in unless self.expires_at.nil?
     end
   end
 

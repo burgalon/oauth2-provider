@@ -125,4 +125,18 @@ describe OAuth2::Provider.access_token_class do
       OAuth2::Provider.access_token_class.refresh_with(nil).should be_nil
     end
   end
+
+  describe "creating a token without expiry" do
+    subject do
+      token = OAuth2::Provider.access_token_class.create! :authorization => create_authorization
+      token.expires_at = nil
+      token.refresh_token = nil
+      token
+    end
+
+    it "returns false when asked expires?" do
+      subject.expired?.should == false
+      subject.expires_in.should == nil
+    end
+  end
 end
