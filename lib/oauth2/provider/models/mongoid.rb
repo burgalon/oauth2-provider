@@ -21,10 +21,5 @@ module OAuth2::Provider::Models::Mongoid
     OAuth2::Provider.access_token_class_name ||= "OAuth2::Provider::Models::Mongoid::AccessToken"
     OAuth2::Provider.authorization_code_class_name ||= "OAuth2::Provider::Models::Mongoid::AuthorizationCode"
     OAuth2::Provider.authorization_class_name ||= "OAuth2::Provider::Models::Mongoid::Authorization"
-
-    OAuth2::Provider.client_class.collection_name = client_collection_name
-    OAuth2::Provider.access_token_class.collection_name = access_token_collection_name
-    OAuth2::Provider.authorization_code_class.collection_name = authorization_code_collection_name
-    OAuth2::Provider.authorization_class.collection_name = authorization_collection_name
   end
 end
