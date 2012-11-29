@@ -10,6 +10,8 @@ class OAuth2::Provider::Models::Mongoid::AccessToken
       field :expires_at, :type => Time
       field :refresh_token
 
+      index(:access_token => 1)
+
       belongs_to(:authorization,
         :class_name => OAuth2::Provider.authorization_class_name,
         :foreign_key => :oauth_authorization_id
